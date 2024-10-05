@@ -15,6 +15,17 @@ const chinaExam: DictionaryResource[] = [
     languageCategory: 'en',
   },
   {
+    id: 'custom',
+    name: 'Custom Dictionary',
+    description: '自定义词典',
+    category: '自定义',
+    tags: ['custom'],
+    url: '/dicts/custom.json',
+    length: 100,
+    language: 'en',
+    languageCategory: 'en',
+  },
+  {
     id: 'cet6',
     name: 'CET-6',
     description: '大学英语六级词库',
