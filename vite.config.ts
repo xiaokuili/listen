@@ -32,9 +32,13 @@ export default defineConfig(async ({ mode }) => {
       minify: true,
       outDir: 'build',
       sourcemap: false,
+      target: 'esnext', // 添加这一行以支持最新的 ECMAScript 特性
     },
     esbuild: {
       drop: mode === 'development' ? [] : ['console', 'debugger'],
+      supported: {
+        'top-level-await': true, // 添加这一行以明确支持顶层 await
+      },
     },
     define: {
       REACT_APP_DEPLOY_ENV: JSON.stringify(process.env.REACT_APP_DEPLOY_ENV),
