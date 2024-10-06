@@ -3692,7 +3692,7 @@ export const dictionaryResources: DictionaryResource[] = [
 ]
 
 async function getCustomDictLength() {
-  const words = await fetchWords('custom', true)
+  const words = await fetchWords(true)
   return words.length
 }
 

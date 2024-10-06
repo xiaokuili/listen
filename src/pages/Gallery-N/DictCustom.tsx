@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import type { Word } from '@/typings'
 import { fetchWords } from '@/utils/wordListFetcher'
+import { API_BASE_URL, API_KEY } from '@/utils/wordListFetcher'
 import { useCallback, useEffect, useState } from 'react'
 import IconFilter from '~icons/tabler/filter'
 
@@ -10,10 +11,6 @@ interface FilterItem {
   id: number
   word: string
 }
-
-const API_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1heWJlX3h1ZSIsImV4cCI6MTcyODU2MDE0OSwidG9rZW5fbGltaXQiOjEwMDB9.iGdcpQvXS9RPh0wXKvMG5TWpR5QwZbFrL7fEGwDVX8o'
-const API_BASE_URL = 'https://listenhappy.xyz'
 
 export async function updateListeningPractice(word: string, isListeningPractice: boolean): Promise<any> {
   const url = new URL(`${API_BASE_URL}/update_listening_practice`)
@@ -53,7 +50,7 @@ function FilterDict({ onClose, onSubmit }: { onClose: () => void; onSubmit: (sel
       setIsLoading(true)
 
       try {
-        const data = await fetchWords('https://listenhappy.xyz/user/words', false)
+        const data = await fetchWords(false)
         const formattedData: FilterItem[] = data.map((word: Word) => ({
           id: word.name,
           word: word.name,
