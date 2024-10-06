@@ -10,7 +10,7 @@ interface Response {
 }
 
 export async function fetchWords(url: string, isListeningPractice = false): Promise<Word[]> {
-  const response = await fetch('http://127.0.0.1:8000/user/words', {
+  const response = await fetch('https://listenhappy.xyz/user/words', {
     headers: {
       accept: 'application/json',
       'X-API-Key':

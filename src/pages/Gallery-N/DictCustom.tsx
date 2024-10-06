@@ -13,7 +13,7 @@ interface FilterItem {
 
 const API_KEY =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1heWJlX3h1ZSIsImV4cCI6MTcyODU2MDE0OSwidG9rZW5fbGltaXQiOjEwMDB9.iGdcpQvXS9RPh0wXKvMG5TWpR5QwZbFrL7fEGwDVX8o'
-const API_BASE_URL = 'http://127.0.0.1:8000'
+const API_BASE_URL = 'https://listenhappy.xyz'
 
 export async function updateListeningPractice(word: string, isListeningPractice: boolean): Promise<any> {
   const url = new URL(`${API_BASE_URL}/update_listening_practice`)
@@ -53,7 +53,7 @@ function FilterDict({ onClose, onSubmit }: { onClose: () => void; onSubmit: (sel
       setIsLoading(true)
 
       try {
-        const data = await fetchWords('http://127.0.0.1:8000/user/words', false)
+        const data = await fetchWords('https://listenhappy.xyz/user/words', false)
         const formattedData: FilterItem[] = data.map((word: Word) => ({
           id: word.name,
           word: word.name,
