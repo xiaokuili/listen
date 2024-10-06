@@ -1,5 +1,6 @@
 import type { Dictionary, DictionaryResource } from '@/typings/index'
 import { calcChapterCount } from '@/utils'
+import { fetchWords } from '@/utils/wordListFetcher'
 
 // 中国考试
 const chinaExam: DictionaryResource[] = [
@@ -21,7 +22,6 @@ const chinaExam: DictionaryResource[] = [
     category: '自定义',
     tags: ['custom'],
     url: '/dicts/custom.json',
-    length: 100,
     language: 'en',
     languageCategory: 'en',
   },
@@ -3691,10 +3691,32 @@ export const dictionaryResources: DictionaryResource[] = [
   // },
 ]
 
-export const dictionaries: Dictionary[] = dictionaryResources.map((resource) => ({
-  ...resource,
-  chapterCount: calcChapterCount(resource.length),
-}))
+async function getCustomDictLength() {
+  const words = await fetchWords('custom', true)
+  return words.length
+}
+
+// 使用 IIFE (Immediately Invoked Function Expression) 来允许顶层 await
+export const dictionaries = await (async (): Promise<Dictionary[]> => {
+  const dicts = []
+
+  for (const resource of dictionaryResources) {
+    let length = resource.length // 默认使用资源中定义的长度
+
+    // 如果字典是自定义的，则动态获取长度
+    if (resource.id === 'custom') {
+      length = await getCustomDictLength()
+      resource.length = length
+    }
+
+    dicts.push({
+      ...resource,
+      chapterCount: calcChapterCount(length),
+    })
+  }
+
+  return dicts
+})()
 
 /**
  * An object-map from dictionary IDs to dictionary themselves.
