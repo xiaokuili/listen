@@ -44,6 +44,7 @@ function FilterDict({ onClose, onSubmit }: { onClose: () => void; onSubmit: (sel
   const [filterData, setFilterData] = useState<FilterItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,6 +73,8 @@ function FilterDict({ onClose, onSubmit }: { onClose: () => void; onSubmit: (sel
   }
 
   const handleSubmit = async () => {
+    setIsSubmitting(true)
+
     const selectedData = filterData.filter((item) => selectedItems.includes(item.id))
 
     // 更新所选单词的听力练习状态
@@ -85,6 +88,7 @@ function FilterDict({ onClose, onSubmit }: { onClose: () => void; onSubmit: (sel
     }
 
     onSubmit(selectedData)
+    setIsSubmitting(false)
   }
 
   const loadMore = async () => {
@@ -144,7 +148,9 @@ function FilterDict({ onClose, onSubmit }: { onClose: () => void; onSubmit: (sel
         <Button variant="outline" onClick={onClose}>
           取消
         </Button>
-        <Button onClick={handleSubmit}>生成词典</Button>
+        <Button onClick={handleSubmit} disabled={isSubmitting}>
+          {isSubmitting ? '生成中...' : '生成词典'}
+        </Button>
       </div>
     </div>
   )
