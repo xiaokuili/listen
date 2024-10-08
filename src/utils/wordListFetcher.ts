@@ -3,6 +3,7 @@ import type { Word } from '@/typings'
 export const API_KEY =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1heWJlX3h1ZSIsImV4cCI6MTcyODU2MDE0OSwidG9rZW5fbGltaXQiOjEwMDB9.iGdcpQvXS9RPh0wXKvMG5TWpR5QwZbFrL7fEGwDVX8o'
 export const API_BASE_URL = 'https://listenhappy.xyz'
+// export const API_BASE_URL = 'http://127.0.0.1:8000'
 
 interface Response {
   word: string
