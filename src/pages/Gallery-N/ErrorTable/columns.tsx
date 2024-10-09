@@ -86,7 +86,7 @@ export function getRowsFromErrorWordData(data: TErrorWordData[]): ErrorColumn[] 
   return data.map((item) => {
     return {
       word: item.word,
-      trans: item.originData.trans.join('，') ?? '',
+      trans: Array.isArray(item.originData.trans) ? item.originData.trans.join('，') : item.originData.trans || '',
       errorCount: item.errorCount,
       errorChar: item.errorChar,
     }
