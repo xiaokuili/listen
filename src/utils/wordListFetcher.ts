@@ -23,10 +23,16 @@ export async function fetchWords(isListeningPractice = false): Promise<Word[]> {
     },
   })
   const data = await response.json()
-  const words: Word[] = data.words.map((word: Response) => ({
+  let words: Word[] = data.words.map((word: Response) => ({
     name: word.word,
     trans: '',
   }))
+
+  // 如果是听力练习模式，反转words数组
+  if (isListeningPractice) {
+    words = words.reverse()
+  }
+
   return words
 }
 
